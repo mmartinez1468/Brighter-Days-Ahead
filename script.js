@@ -370,3 +370,173 @@ document.addEventListener("DOMContentLoaded", () => {
     // Video Effects
     initializeScrollExpandEffect();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =====================================================================
+// PROFESSIONAL IMAGE SLIDER
+// =====================================================================
+const seHeroSection = document.getElementById('seHeroSection');
+const seHeroBg = document.getElementById('seHeroBg');
+const seHeroOverlay = document.getElementById('seHeroOverlay');
+
+// Slider variables
+let seHeroCurrentSlide = 0;
+const seHeroSlides = document.querySelectorAll('.se-hero-slide');
+const seHeroDots = document.querySelectorAll('.se-hero-dot');
+const seHeroThumbnails = document.querySelectorAll('.se-hero-thumbnail');
+const seHeroPrevBtn = document.getElementById('seHeroPrevBtn');
+const seHeroNextBtn = document.getElementById('seHeroNextBtn');
+const seHeroTotalSlides = seHeroSlides.length;
+
+// Background images for each slide
+const seHeroBackgroundImages = [
+    'url(images/Eclipse-Aerial-scaled.jpg)',
+    'url(images/metal_roof.jpeg)',
+    'url(images/residential-roofing-700x400.jpg)',
+    'url(images/wakefield-bridge-teaser-1.jpg)',
+    'url(images/What-Is-Metal-Roofing-1.webp)'
+];
+
+function updateScrollExpandEffect() {
+    const rect = seHeroSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    let progress = 0;
+    
+    if (rect.top < windowHeight && rect.bottom > 0) {
+        const scrolledIntoSection = windowHeight - rect.top;
+        const totalScrollDistance = rect.height;
+        progress = Math.max(0, Math.min(1, scrolledIntoSection / totalScrollDistance));
+    } else if (rect.bottom <= 0) {
+        progress = 1;
+    }
+    
+    const minScale = 0.1;
+    const maxScale = 1;
+    const scale = minScale + (progress * (maxScale - minScale));
+    
+    seHeroBg.style.transform = `scale(${scale})`;
+    
+    if (scale >= 0.98) {
+        seHeroBg.classList.add('se-hero-fully-expanded');
+    } else {
+        seHeroBg.classList.remove('se-hero-fully-expanded');
+    }
+    
+    // Only apply scroll-based height on desktop
+    if (window.innerWidth >= 769) {
+        if (progress >= 0.5) {
+            const divProgress = (progress - 0.5) / 0.5;
+            const divHeight = divProgress * 30;
+            seHeroOverlay.style.height = `${divHeight}%`;
+        } else {
+            seHeroOverlay.style.height = '0%';
+        }
+    }
+}
+
+// Slider functions
+function seHeroShowSlide(index) {
+    // Update slides
+    seHeroSlides.forEach((slide, i) => {
+        slide.classList.remove('se-hero-slide-active');
+        slide.classList.remove('se-hero-slide-expanded');
+        if (i === index) {
+            slide.classList.add('se-hero-slide-active');
+        }
+    });
+    
+    // Update dots
+    seHeroDots.forEach((dot, i) => {
+        dot.classList.remove('se-hero-dot-active');
+        if (i === index) {
+            dot.classList.add('se-hero-dot-active');
+        }
+    });
+    
+    // Update thumbnails
+    seHeroThumbnails.forEach((thumbnail, i) => {
+        thumbnail.classList.remove('se-hero-thumbnail-active');
+        if (i === index) {
+            thumbnail.classList.add('se-hero-thumbnail-active');
+        }
+    });
+    
+    // Change background image
+    seHeroBg.style.backgroundImage = seHeroBackgroundImages[index];
+    
+    // Reset overlay expanded state when changing slides on mobile
+    if (window.innerWidth < 769) {
+        seHeroOverlay.classList.remove('se-hero-overlay-expanded');
+    }
+    
+    seHeroCurrentSlide = index;
+}
+
+function seHeroNextSlide() {
+    const next = (seHeroCurrentSlide + 1) % seHeroTotalSlides;
+    seHeroShowSlide(next);
+}
+
+function seHeroPrevSlide() {
+    const prev = (seHeroCurrentSlide - 1 + seHeroTotalSlides) % seHeroTotalSlides;
+    seHeroShowSlide(prev);
+}
+
+// Dropdown arrow functionality for mobile
+const seHeroDropdownArrows = document.querySelectorAll('.se-hero-dropdown-arrow');
+seHeroDropdownArrows.forEach((arrow, index) => {
+    arrow.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        // Only work on mobile
+        if (window.innerWidth < 769) {
+            const slide = seHeroSlides[index];
+            const isCurrentlyExpanded = slide.classList.contains('se-hero-slide-expanded');
+            
+            // Toggle current slide
+            slide.classList.toggle('se-hero-slide-expanded');
+            
+            // Toggle overlay
+            if (isCurrentlyExpanded) {
+                seHeroOverlay.classList.remove('se-hero-overlay-expanded');
+            } else {
+                seHeroOverlay.classList.add('se-hero-overlay-expanded');
+            }
+        }
+    });
+});
+
+// Event listeners
+window.addEventListener('scroll', updateScrollExpandEffect);
+seHeroNextBtn.addEventListener('click', seHeroNextSlide);
+seHeroPrevBtn.addEventListener('click', seHeroPrevSlide);
+
+// Dots event listeners
+seHeroDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        seHeroShowSlide(index);
+    });
+});
+
+// Thumbnail event listeners
+seHeroThumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+        seHeroShowSlide(index);
+    });
+});
+
+// Initial updates
+updateScrollExpandEffect();
+seHeroShowSlide(0);
