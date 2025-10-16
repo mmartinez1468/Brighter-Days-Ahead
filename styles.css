@@ -2100,78 +2100,45 @@ CTA CARD WRAPPER
 
 
 
-/* ==========================================================================
-   PORTFOLIO SECTION - Safari Mobile Optimized
-========================================================================== */
-
-#portfolio {
-    width: 100%;
-    overflow: hidden;
-    background-color: black;
-    padding: 50px 0;
-}
 
 .double-carousel {
-    margin: 0 auto 20px;
+    margin: 50px auto;
     width: 100%;
-    display: block; /* Changed from flex */
+    display: flex;
     overflow: hidden;
     background-color: black;
-    position: relative;
-    height: calc(3rem * 3 + 2rem); /* Fixed height for mobile */
-    /* Safari mobile fixes */
+    will-change: transform;
+    /* Add these for Safari */
     -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
+    -webkit-perspective: 1000;
 }
 
 .double-carousel::-webkit-scrollbar {
     display: none;
 }
 
-/* Wrapper to hold both groups side by side */
-.double-carousel::after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
 .double-carousel-group {
-    display: inline-flex; /* Changed to inline-flex */
-    align-items: center;
-    flex-shrink: 0;
-    animation: double-carousel-spin 20s linear infinite;
-    will-change: transform;
-    white-space: nowrap;
-    /* Critical Safari fixes */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Second group positioning */
-.double-carousel-group[aria-hidden="true"] {
-    left: 100%;
-}
-
-.double-carousel-card {
-    flex: 0 0 auto;
-    width: 9rem; /* Fixed width in rem */
-    height: 9rem; /* Fixed height in rem */
-    margin-right: 1rem;
-    padding: 0;
-    font-size: 2rem;
-    border-radius: 0.2em;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1em;
+    animation: double-carousel-spin 20s linear infinite;
+    padding-right: 1em;
+    will-change: transform;
+    /* Critical Safari fixes */
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.double-carousel-card {
+    flex: 0 0 5em;
+    height: 5em;
+    padding: 1em;
+    font-size: 3rem;
+    border-radius: 0.2em;
+    text-align: center;
+    align-content: center;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -2181,14 +2148,11 @@ CTA CARD WRAPPER
     position: relative;
     overflow: hidden;
     /* Enhanced Safari rendering */
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
     backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    flex-shrink: 0;
-    display: inline-flex; /* Ensure inline display */
-    vertical-align: middle;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 /* Overlay for better text readability */
@@ -2202,10 +2166,9 @@ CTA CARD WRAPPER
     background: rgba(0, 0, 0, 0.3);
     border-radius: 0.2em;
     z-index: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    /* Safari fix for pseudo-element */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .double-carousel-card > * {
@@ -2229,13 +2192,13 @@ CTA CARD WRAPPER
 .card-f { background-image: url(./images/portfolio-9.jpg); }
 
 @keyframes double-carousel-spin {
-    0% {
-        transform: translate3d(0, -50%, 0);
-        -webkit-transform: translate3d(0, -50%, 0);
+    from { 
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
     }
-    100% {
-        transform: translate3d(-100%, -50%, 0);
-        -webkit-transform: translate3d(-100%, -50%, 0);
+    to { 
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
     }
 }
 
@@ -2244,48 +2207,20 @@ CTA CARD WRAPPER
 }
 
 @keyframes double-carousel-spin-reverse {
-    0% {
-        transform: translate3d(-100%, -50%, 0);
-        -webkit-transform: translate3d(-100%, -50%, 0);
+    from { 
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
     }
-    100% {
-        transform: translate3d(0, -50%, 0);
-        -webkit-transform: translate3d(0, -50%, 0);
-    }
-}
-
-/* Pause on hover - disable on touch devices */
-@media (hover: hover) and (pointer: fine) {
-    .double-carousel:hover .double-carousel-group,
-    .double-carousel-bottom:hover .double-carousel-group {
-        animation-play-state: paused;
+    to { 
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
     }
 }
 
-/* Tablet and up */
-@media screen and (min-width: 768px) {
-    .double-carousel {
-        height: calc(3rem * 4 + 2rem);
-    }
-    
-    .double-carousel-card {
-        width: 12rem;
-        height: 12rem;
-        font-size: 2.5rem;
-    }
-}
-
-/* Desktop */
-@media screen and (min-width: 1024px) {
-    .double-carousel {
-        height: calc(3rem * 5 + 2rem);
-    }
-    
-    .double-carousel-card {
-        width: 15rem;
-        height: 15rem;
-        font-size: 3rem;
-    }
+/* Pause on hover */
+.double-carousel:hover .double-carousel-group,
+.double-carousel-bottom:hover .double-carousel-group {
+    animation-play-state: paused;
 }
 
 /* Reduce motion for accessibility */
