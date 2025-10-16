@@ -401,11 +401,11 @@ const seHeroTotalSlides = seHeroSlides.length;
 
 // Background images for each slide
 const seHeroBackgroundImages = [
-    'url(images/Eclipse-Aerial-scaled.jpg)',
-    'url(images/metal_roof.jpeg)',
-    'url(images/residential-roofing-700x400.jpg)',
-    'url(images/wakefield-bridge-teaser-1.jpg)',
-    'url(images/What-Is-Metal-Roofing-1.webp)'
+    'url(images/services-1.jpg)',
+    'url(images/services-2.jpg)',
+    'url(images/services-3.jpg)',
+    'url(images/services-4.jpg)',
+    'url(images/services-5.jpg)'
 ];
 
 function updateScrollExpandEffect() {
