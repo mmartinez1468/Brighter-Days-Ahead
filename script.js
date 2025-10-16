@@ -267,7 +267,7 @@ function initializeScrollAnimations() {
  */
 function initializeHeroScrollIndicator() {
     const heroScrollIndicator = document.getElementById('heroScrollIndicator');
-    const scrollExpandSection = document.getElementById('scrollExpandSection');
+    const scrollExpandSection = document.getElementById('callToAction');
 
     if (!heroScrollIndicator || !scrollExpandSection) return;
 
