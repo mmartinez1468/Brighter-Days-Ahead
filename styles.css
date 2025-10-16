@@ -2197,14 +2197,6 @@ CTA VISUAL
             animation-play-state: paused;
         }
 
-        /* Reduce motion for accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            .double-carousel-group {
-                animation: none;
-            }
-        }
-
-
 
 
 
