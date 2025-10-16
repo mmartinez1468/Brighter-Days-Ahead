@@ -2114,10 +2114,11 @@ CTA CARD WRAPPER
 .double-carousel {
     margin: 0 auto 20px;
     width: 100%;
-    display: flex;
+    display: block; /* Changed from flex */
     overflow: hidden;
     background-color: black;
     position: relative;
+    height: calc(3rem * 3 + 2rem); /* Fixed height for mobile */
     /* Safari mobile fixes */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -2129,26 +2130,41 @@ CTA CARD WRAPPER
     display: none;
 }
 
+/* Wrapper to hold both groups side by side */
+.double-carousel::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
 .double-carousel-group {
-    display: flex;
+    display: inline-flex; /* Changed to inline-flex */
     align-items: center;
     flex-shrink: 0;
     animation: double-carousel-spin 20s linear infinite;
     will-change: transform;
+    white-space: nowrap;
     /* Critical Safari fixes */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    /* Remove gap and use margin instead for Safari compatibility */
-    gap: 0;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Second group positioning */
+.double-carousel-group[aria-hidden="true"] {
+    left: 100%;
 }
 
 .double-carousel-card {
     flex: 0 0 auto;
-    width: calc(3rem * 3); /* 9rem base width */
-    height: calc(3rem * 3); /* 9rem base height */
-    margin-right: 1rem; /* Replace gap with margin for Safari */
+    width: 9rem; /* Fixed width in rem */
+    height: 9rem; /* Fixed height in rem */
+    margin-right: 1rem;
     padding: 0;
     font-size: 2rem;
     border-radius: 0.2em;
@@ -2171,11 +2187,8 @@ CTA CARD WRAPPER
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     flex-shrink: 0;
-}
-
-/* Last card in group shouldn't have margin to prevent gaps */
-.double-carousel-group .double-carousel-card:last-child {
-    margin-right: 1rem;
+    display: inline-flex; /* Ensure inline display */
+    vertical-align: middle;
 }
 
 /* Overlay for better text readability */
@@ -2189,7 +2202,6 @@ CTA CARD WRAPPER
     background: rgba(0, 0, 0, 0.3);
     border-radius: 0.2em;
     z-index: 1;
-    /* Safari fix for pseudo-element */
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
@@ -2218,12 +2230,12 @@ CTA CARD WRAPPER
 
 @keyframes double-carousel-spin {
     0% {
-        transform: translate3d(0, 0, 0);
-        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, -50%, 0);
+        -webkit-transform: translate3d(0, -50%, 0);
     }
     100% {
-        transform: translate3d(-100%, 0, 0);
-        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, -50%, 0);
+        -webkit-transform: translate3d(-100%, -50%, 0);
     }
 }
 
@@ -2233,12 +2245,12 @@ CTA CARD WRAPPER
 
 @keyframes double-carousel-spin-reverse {
     0% {
-        transform: translate3d(-100%, 0, 0);
-        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, -50%, 0);
+        -webkit-transform: translate3d(-100%, -50%, 0);
     }
     100% {
-        transform: translate3d(0, 0, 0);
-        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, -50%, 0);
+        -webkit-transform: translate3d(0, -50%, 0);
     }
 }
 
@@ -2252,18 +2264,26 @@ CTA CARD WRAPPER
 
 /* Tablet and up */
 @media screen and (min-width: 768px) {
+    .double-carousel {
+        height: calc(3rem * 4 + 2rem);
+    }
+    
     .double-carousel-card {
-        width: calc(3rem * 4); /* 12rem */
-        height: calc(3rem * 4); /* 12rem */
+        width: 12rem;
+        height: 12rem;
         font-size: 2.5rem;
     }
 }
 
 /* Desktop */
 @media screen and (min-width: 1024px) {
+    .double-carousel {
+        height: calc(3rem * 5 + 2rem);
+    }
+    
     .double-carousel-card {
-        width: calc(3rem * 5); /* 15rem */
-        height: calc(3rem * 5); /* 15rem */
+        width: 15rem;
+        height: 15rem;
         font-size: 3rem;
     }
 }
