@@ -2083,12 +2083,11 @@ CTA CARD WRAPPER
 
 
 
-
 .double-carousel {
   margin: 50px auto;
   width: 100%;
   display: flex;
-  gap: 1em; /* Gap between the two groups */
+  gap: 1em;
   overflow: hidden;
   position: relative;
 }
@@ -2100,7 +2099,7 @@ CTA CARD WRAPPER
 .double-carousel-group {
   display: flex;
   align-items: center;
-  gap: 1em; /* Gap between cards within each group */
+  gap: 1em;
   flex-shrink: 0;
   width: max-content;
   animation: double-carousel-spin 30s linear infinite;
@@ -2110,39 +2109,93 @@ CTA CARD WRAPPER
   flex: 0 0 250px;
   width: 250px;
   height: 250px;
-  padding: 1em;
-  background-color: purple;
-  font-size: 2rem;
   border-radius: .2em;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  
+  /* Optimized background image properties */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Optional: Add a subtle overlay for better text readability */
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Make sure background images cover properly if using them */
-.double-carousel-card.card-1 { background: purple; }
-.double-carousel-card.card-2 { background: darkviolet; }
-.double-carousel-card.card-3 { background: mediumorchid; }
-.double-carousel-card.card-4 { background: mediumpurple; }
-.double-carousel-card.card-5 { background: rebeccapurple; }
-.double-carousel-card.card-6 { background: indigo; }
+/* Add a dark overlay for better content visibility (optional) */
+.double-carousel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: background 0.3s ease;
+}
 
-.double-carousel-card.card-a { background: purple; }
-.double-carousel-card.card-b { background: darkviolet; }
-.double-carousel-card.card-c { background: mediumorchid; }
-.double-carousel-card.card-d { background: mediumpurple; }
-.double-carousel-card.card-e { background: rebeccapurple; }
-.double-carousel-card.card-f { background: indigo; }
+.double-carousel-card:hover::before {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Ensure content stays above overlay */
+.double-carousel-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Top Carousel Cards - Replace with your image paths */
+.double-carousel-card.card-1 { 
+  background-image: url('images/about-image.jpg');
+}
+.double-carousel-card.card-2 { 
+  background-image: url('images/services-2.jpg');
+}
+.double-carousel-card.card-3 { 
+  background-image: url('images/services-1.jpg');
+}
+.double-carousel-card.card-4 { 
+  background-image: url('images/portfolio-1.jpg');
+}
+.double-carousel-card.card-5 { 
+  background-image: url('images/portfolio-2.jpg');
+}
+.double-carousel-card.card-6 { 
+  background-image: url('images/portfolio-3.jpg');
+}
+
+/* Bottom Carousel Cards - Replace with your image paths */
+.double-carousel-card.card-a { 
+  background-image: url('images/portfolio-4.jpg');
+}
+.double-carousel-card.card-b { 
+  background-image: url('images/portfolio-5.jpg');
+}
+.double-carousel-card.card-c { 
+  background-image: url('images/portfolio-6.jpg');
+}
+.double-carousel-card.card-d { 
+  background-image: url('images/portfolio-7.jpg');
+}
+.double-carousel-card.card-e { 
+  background-image: url('images/services-5.jpg');
+}
+.double-carousel-card.card-f { 
+  background-image: url('images/portfolio-9.jpg');
+}
 
 @keyframes double-carousel-spin {
   from { transform: translateX(0); }
   to { transform: translateX(-100%); }
 }
 
-/* =============================
-   BOTTOM CAROUSEL (reverse)
-============================== */
+/* Bottom Carousel (reverse) */
 .double-carousel-bottom .double-carousel-group {
   animation: double-carousel-spin-reverse 30s linear infinite;
 }
@@ -2156,6 +2209,23 @@ CTA CARD WRAPPER
 .double-carousel:hover .double-carousel-group,
 .double-carousel-bottom:hover .double-carousel-group {
   animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .double-carousel-card {
+    flex: 0 0 200px;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .double-carousel-card {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 150px;
+  }
 }
 
 
@@ -2204,17 +2274,16 @@ CTA CARD WRAPPER
     padding: clamp(3rem, calc(3.2608695652vw + 2.347826087rem), 4.875rem) 1rem;
 }
 
-.contact-intro {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
-    padding-bottom: 2rem;
+.contact-header {
+    margin-bottom: 2rem;
 }
 
-.contact-intro > h2 {
-    text-align: center;
+.contact-header h2 {
+    text-transform: capitalize;
+}
+
+.contact-header span {
+    color: var(--coloraccent);
 }
 
 /* Contact Form Container */
@@ -2222,10 +2291,6 @@ CTA CARD WRAPPER
     border-radius: 20px;
     position: relative;
     width: 100%;
-}
-
-.contact-header {
-    margin-bottom: 1rem;
 }
 
 /* Form Elements */
@@ -2370,9 +2435,8 @@ CTA CARD WRAPPER
 
 @media screen and (min-width: 768px) {
     
-    .contact-intro > h2 {
-        font-size: 3rem;
-        line-height: 3rem;
+    .contact-header h2 {
+        font-size: var(--fontheader768);
     }
 }
 
@@ -2385,6 +2449,13 @@ CTA CARD WRAPPER
     .contact-intro > h2 {
         font-size: 4rem !important;
         line-height: 4.25rem !important;
+    }
+}
+
+@media screen and (min-width: 1248px) {
+    .contact-header h2 {
+        font-size: var(--fontheader1248);
+        margin-bottom: 1rem;
     }
 }
 
