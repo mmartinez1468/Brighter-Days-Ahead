@@ -406,6 +406,101 @@
 
 
     <!-- ========================================================================== -->
+    <!-- CONTACT FORM SECTION -->
+    <!-- ========================================================================== -->
+    <section id="contact">
+        <div class="contact-container">
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="post">
+                <input type="hidden" name="access_key" value="5859c3e1-f867-4635-9559-d832ee856a88">
+                <!-- Full Name and Business Email Row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            class="form-input" 
+                            placeholder="Enter your full name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            id="businessEmail" 
+                            name="businessEmail" 
+                            class="form-input" 
+                            placeholder="your.email@company.com"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Message -->
+                <div class="form-group">
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        class="form-textarea" 
+                        placeholder="Tell us about your project, goals, and any specific requirements..."
+                        required
+                    ></textarea>
+                </div>
+
+                <!-- Budget Dropdown -->
+                <div class="form-group">
+                    <label for="budget" class="form-label">Project Budget *</label>
+                    <select id="budget" name="budget" class="form-select" required>
+                        <option value="">Select your budget range</option>
+                        <option value="under-5k">Under $1,000</option>
+                        <option value="5k-10k">$2,000 - $3,000</option>
+                        <option value="10k-25k">$4,000 - $5,000</option>
+                        <option value="25k-50k">$7,000 - $10,000</option>
+                        <option value="50k-plus">$25,000+</option>
+                    </select>
+                </div>
+
+                <!-- Services Checkboxes -->
+                <div class="checkbox-group">
+                    <label class="form-label">Services Needed (Select all that apply)</label>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="webDesign" name="services[]" value="web-design" class="checkbox-input">
+                        <label for="webDesign" class="checkbox-label">Web Design & Development</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="branding" name="services[]" value="branding" class="checkbox-input">
+                        <label for="branding" class="checkbox-label">Brand Identity & Logo Design</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="ecommerce" name="services[]" value="ecommerce" class="checkbox-input">
+                        <label for="ecommerce" class="checkbox-label">E-commerce Solutions</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="marketing" name="services[]" value="marketing" class="checkbox-input">
+                        <label for="marketing" class="checkbox-label">Digital Marketing & SEO</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="maintenance" name="services[]" value="maintenance" class="checkbox-input">
+                        <label for="maintenance" class="checkbox-label">Website Maintenance & Support</label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="nav-button" id="contactButton">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- ========================================================================== -->
     <!-- FOOTER SECTION -->
     <!-- ========================================================================== -->
     <footer class="footer-section">
