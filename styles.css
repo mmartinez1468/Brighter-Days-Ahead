@@ -2086,149 +2086,71 @@ CTA CARD WRAPPER
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.double-carousel {
-    margin: 50px auto;
-    width: 100%;
-    display: flex;
-    overflow: hidden;
-    background-color: black;
-    will-change: transform;
-    /* Add these for Safari */
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-}
-
-.double-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.double-carousel-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-    animation: double-carousel-spin 20s linear infinite;
-    padding-right: 1em;
-    will-change: transform;
-    /* Critical Safari fixes */
-    -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-}
-
-.double-carousel-card {
-    flex: 0 0 5em;
-    height: 5em;
-    padding: 1em;
-    font-size: 3rem;
-    border-radius: 0.2em;
-    text-align: center;
-    align-content: center;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-    font-weight: bold;
-    position: relative;
-    overflow: hidden;
-    /* Enhanced Safari rendering */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-/* Overlay for better text readability */
-.double-carousel-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 0.2em;
-    z-index: 1;
-    /* Safari fix for pseudo-element */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-}
-
-.double-carousel-card > * {
-    position: relative;
-    z-index: 2;
-}
-
-/* Individual card backgrounds */
-.card-1 { background-image: url(./images/about-image.jpg); }
-.card-2 { background-image: url(./images/services-2.jpg); }
-.card-3 { background-image: url(./images/services-1.jpg); }
-.card-4 { background-image: url(./images/portfolio-1.jpg); }
-.card-5 { background-image: url(./images/portfolio-2.jpg); }
-.card-6 { background-image: url(./images/portfolio-3.jpg); }
-
-.card-a { background-image: url(./images/portfolio-4.jpg); }
-.card-b { background-image: url(./images/portfolio-5.jpg); }
-.card-c { background-image: url(./images/portfolio-6.jpg); }
-.card-d { background-image: url(./images/portfolio-7.jpg); }
-.card-e { background-image: url(./images/services-5.jpg); }
-.card-f { background-image: url(./images/portfolio-9.jpg); }
-
-@keyframes double-carousel-spin {
-    from { 
-        transform: translateX(0);
-        -webkit-transform: translateX(0);
+    .double-carousel {
+      margin: 50px auto;
+      width: 100%;
+      display: flex;
+      overflow-x: hidden;
     }
-    to { 
-        transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
+
+    .double-carousel::-webkit-scrollbar {
+      display: none;
     }
-}
 
-.double-carousel-bottom .double-carousel-group {
-    animation: double-carousel-spin-reverse 20s linear infinite;
-}
-
-@keyframes double-carousel-spin-reverse {
-    from { 
-        transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
-    }
-    to { 
-        transform: translateX(0);
-        -webkit-transform: translateX(0);
-    }
-}
-
-/* Pause on hover */
-.double-carousel:hover .double-carousel-group,
-.double-carousel-bottom:hover .double-carousel-group {
-    animation-play-state: paused;
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
     .double-carousel-group {
-        animation: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+      animation: double-carousel-spin 20s linear infinite;
+      padding-right: 1em;
     }
-}
+
+    .double-carousel-card {
+      flex: 0 0 5em;
+      height: 5em;
+      padding: 1em;
+      background-color: purple;
+      font-size: 3rem;
+      border-radius: .2em;
+      text-align: center;
+      align-content: center;
+    }
+
+    @keyframes double-carousel-spin {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* =============================
+       BOTTOM CAROUSEL (reverse)
+    ============================== */
+    .double-carousel-bottom .double-carousel-group {
+      animation: double-carousel-spin-reverse 20s linear infinite;
+    }
+
+    @keyframes double-carousel-spin-reverse {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    /* Pause on hover */
+    .double-carousel:hover .double-carousel-group,
+    .double-carousel-bottom:hover .double-carousel-group {
+      animation-play-state: paused;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
