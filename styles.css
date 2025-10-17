@@ -2084,61 +2084,79 @@ CTA CARD WRAPPER
 
 
 
+.double-carousel {
+  margin: 50px auto;
+  width: 100%;
+  display: flex;
+  gap: 1em; /* Gap between the two groups */
+  overflow: hidden;
+  position: relative;
+}
 
+.double-carousel::-webkit-scrollbar {
+  display: none;
+}
 
-    .double-carousel {
-      margin: 50px auto;
-      width: 100%;
-      display: flex;
-      overflow-x: hidden;
-    }
+.double-carousel-group {
+  display: flex;
+  align-items: center;
+  gap: 1em; /* Gap between cards within each group */
+  flex-shrink: 0;
+  width: max-content;
+  animation: double-carousel-spin 20s linear infinite;
+}
 
-    .double-carousel::-webkit-scrollbar {
-      display: none;
-    }
+.double-carousel-card {
+  flex: 0 0 250px;
+  width: 250px;
+  height: 250px;
+  padding: 1em;
+  background-color: purple;
+  font-size: 2rem;
+  border-radius: .2em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .double-carousel-group {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1em;
-      animation: double-carousel-spin 20s linear infinite;
-      padding-right: 1em;
-    }
+/* Make sure background images cover properly if using them */
+.double-carousel-card.card-1 { background: purple; }
+.double-carousel-card.card-2 { background: darkviolet; }
+.double-carousel-card.card-3 { background: mediumorchid; }
+.double-carousel-card.card-4 { background: mediumpurple; }
+.double-carousel-card.card-5 { background: rebeccapurple; }
+.double-carousel-card.card-6 { background: indigo; }
 
-    .double-carousel-card {
-      flex: 0 0 5em;
-      height: 5em;
-      padding: 1em;
-      background-color: purple;
-      font-size: 3rem;
-      border-radius: .2em;
-      text-align: center;
-      align-content: center;
-    }
+.double-carousel-card.card-a { background: purple; }
+.double-carousel-card.card-b { background: darkviolet; }
+.double-carousel-card.card-c { background: mediumorchid; }
+.double-carousel-card.card-d { background: mediumpurple; }
+.double-carousel-card.card-e { background: rebeccapurple; }
+.double-carousel-card.card-f { background: indigo; }
 
-    @keyframes double-carousel-spin {
-      from { transform: translateX(0); }
-      to { transform: translateX(-100%); }
-    }
+@keyframes double-carousel-spin {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
 
-    /* =============================
-       BOTTOM CAROUSEL (reverse)
-    ============================== */
-    .double-carousel-bottom .double-carousel-group {
-      animation: double-carousel-spin-reverse 20s linear infinite;
-    }
+/* =============================
+   BOTTOM CAROUSEL (reverse)
+============================== */
+.double-carousel-bottom .double-carousel-group {
+  animation: double-carousel-spin-reverse 30s linear infinite;
+}
 
-    @keyframes double-carousel-spin-reverse {
-      from { transform: translateX(-100%); }
-      to { transform: translateX(0); }
-    }
+@keyframes double-carousel-spin-reverse {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
 
-    /* Pause on hover */
-    .double-carousel:hover .double-carousel-group,
-    .double-carousel-bottom:hover .double-carousel-group {
-      animation-play-state: paused;
-    }
+/* Pause on hover */
+.double-carousel:hover .double-carousel-group,
+.double-carousel-bottom:hover .double-carousel-group {
+  animation-play-state: paused;
+}
 
 
 
