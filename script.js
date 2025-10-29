@@ -540,3 +540,26 @@ seHeroThumbnails.forEach((thumbnail, index) => {
 // Initial updates
 updateScrollExpandEffect();
 seHeroShowSlide(0);
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('bgVideo');
+    const container = document.getElementById('scrollExpandVideoBg');
+    
+    // Try to autoplay
+    video.play().catch(() => {
+        // If autoplay fails, play on any click in the container
+        container.addEventListener('click', function() {
+            video.play();
+        }, { once: true });
+    });
+});
